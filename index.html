@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Web Map Lokasi Traditional Store</title>
+
+        <link rel="stylesheet" href="style\style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"/>
+        <link rel="stylesheet" href="http://leaflet.github.io/Leaflet.draw/leaflet.draw.css"/>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+
+        <link rel="stylesheet" type="text/css" href="plugin/leaflet.defaultextent.css">
+        <script src="plugin/leaflet.defaultextent.js"></script>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+        <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+
+        <script src="data/pasar.js"></script>
+        <script src="data/toko.js"></script>
+        
+
+        <style>
+
+        #map { 
+        width: 1275px; 
+        height: 500px; 
+        }
+
+        .webmap-section {
+        position: relative;
+        }
+
+        .styleLabelPoint {
+        background: rgba(255, 255, 255, 0);
+        border: 0;
+        border-radius: 0px;
+        box-shadow: 0 0px 0px;
+        font-size: 7pt;
+        line-height: 1;
+        color: black;
+        text-align: center;
+        font-weight: 500;
+        text-shadow: -1px 1px 0 #fff,
+                    1px 1px 0 #fff,
+                    1px -1px 0 #fff,
+                    -1px -1px 0 #fff;
+        }
+
+
+        </style>
+   
+    </head>
+    
+    <body>
+        <!-- Navigation-->
+        <header>
+            <div class="menu-bar">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <h1><a class="judul1" style="color:white">Lokasi Traditional Store</a></h1>
+                </nav>
+            </div>
+        </div>
+        </header>
+
+        <!-- Web Map -->
+        <section class="webmap-section" id="webmap">
+            
+            <div id='map' class='center'></div>
+    
+                    <script> 
+            
+                        var map = L.map('map', {
+                            center: [-0.418743, 116.987207],
+                            zoom: 16,
+                        });
+                        
+                        var peta1 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	                    maxZoom: 19,
+	                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        }).addTo(map);
+            
+                        var esri = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                        });
+            
+                        var carto = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{r}.png', {attribution:'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>&copy; <a href="http://cartodb.com/attributions">CartoDB</a>', 
+                        subdomains: 'abcd', 
+                        maxZoom: '19'
+                        });
+            
+            
+                        var baseMaps = {
+                            "Light": peta1,
+                            "Dark": carto,
+                            "Satellite": esri,
+                        };
+
+                        var layerControl = L.control.layers(baseMaps).addTo(map);            
+            
+                        var myicon = L.Icon.extend({
+                            options: {
+                                iconSize:     [25],
+                                popupAnchor:  [0, 0],
+                            }
+                        });
+
+                      
+                        var ikontoko = new myicon({iconUrl: 'icons/toko.png'});
+                        
+        
+                        var toko1 = L.marker([-0.421766, 116.9858940], {icon: ikontoko})
+                        .bindPopup("<h1 class='judul'>Profil Toko 1</h1><br> <img src='images/toko1.gif' height='150' class='center'> <p style='text-align:center'> <b>Nama Toko:</b> Toko Rahmadi <br> <b>Kepemilikan:</b> Sewa <br> <b>Tahun Berdiri:</b> 2005 <br> <b>Tipe Toko:</b> Traditional Store <br> <b>Letak Toko:</b> Dalam Pasar </p>")
+                        .addTo(map);
+                        var alfa2 = L.marker([-0.4212661, 116.9865808], {icon: ikontoko})
+                        .bindPopup("<h1 class='judul'>Profil Toko 2</h1><br> <img src='images/toko2.gif' height='150' class='center'> <p style='text-align:center'> <b>Nama Toko:</b> Toko Ikhlas <br> <b>Kepemilikan:</b> Sewa <br> <b>Tahun Berdiri:</b> 2016 <br> <b>Tipe Toko:</b> Traditional Store <br> <b>Letak Toko:</b> Dalam Pasar </p>")
+                        .addTo(map);
+                        var alfa3 = L.marker([-0.4200742, 116.985657], {icon: ikontoko})
+                        .bindPopup("<h1 class='judul'>Profil Toko 3</h1><br> <img src='images/toko3.gif' height='150' class='center'> <p style='text-align:center'> <b>Nama Toko:</b> Toko Annes <br> <b>Kepemilikan:</b> Milik Sendiri <br> <b>Tahun Berdiri:</b> 2020 <br> <b>Tipe Toko:</b> Traditional Store <br> <b>Letak Toko:</b> Luar Pasar </p>")
+                        .addTo(map);
+                        var alfa4 = L.marker([-0.4175937, 116.9858173], {icon: ikontoko})
+                        .bindPopup("<h1 class='judul'>Profil Toko 4</h1><br> <img src='images/toko4.gif' height='150' class='center'> <p style='text-align:lecenterft'> <b>Nama Toko:</b> Toko Sartika <br> <b>Kepemilikan:</b> Milik Sendiri <br> <b>Tahun Berdiri:</b> 2021 <br> <b>Tipe Toko:</b> Traditional Store <br> <b>Letak Toko:</b> Luar Pasar </p>")
+                        .addTo(map);
+                        var alfamidi = L.marker([-0.414902, 116.986129], {icon: ikontoko})
+                        .bindPopup("<h1 class='judul'>Profil Toko 5</h1><br> <img src='images/toko5.gif' height='150' class='center'> <p style='text-align:center'> <b>Nama Toko:</b> Toko Zulfikar <br> <b>Kepemilikan:</b> Milik Sendiri <br> <b>Tahun Berdiri:</b> 2015 <br> <b>Tipe Toko:</b> Traditional Store <br> <b>Letak Toko:</b> Luar Pasar </p>")
+                        .addTo(map);
+                                    
+                        var extent = L.control.defaultExtent().addTo(map);
+            
+                        var geocoder = L.Control.geocoder({
+                        position: 'topleft'
+                        }).addTo(map);
+                                
+                        var scale = L.control.scale().addTo(map);        
+                            
+                        L.geoJSON(pasar_ar,{
+                            style: function(feature) {
+                                switch (feature.properties.Pasar) {
+                                case 'Pasar Tangga Arung': return {color: "#F4BC1C"};
+                                }
+                            },
+                            onEachFeature: function (feature, layer) {layer
+                                .bindPopup('Pasar Tangga Arung');
+                            }
+                            }).addTo(map);
+
+                            var toko_label = L.geoJson(toko_pt, {
+                            pointToLayer: function (feature, latlng) {
+                                return L.marker(latlng, {
+                                icon: L.divIcon({
+                                    className: 'leaflet-mouse-marker',
+                                }),
+                                interactive: false
+                                })
+                            },
+                            onEachFeature: function (feature, layer) {
+                                var content = layer.feature.properties.NomorToko.toString() + '<br>' + '('+layer.feature.properties.NamaToko.toString()+')' + '<br> <br> <br> <br>' ;
+                                layer.bindTooltip(content, {
+                                direction: 'center',
+                                permanent: true,
+                                className: 'styleLabelPoint'
+                                });
+                            }  
+                            });
+                            map.on('moveend', function () {
+                            if (map.getZoom() <= 10 && map.hasLayer(toko_label)) {
+                                map.removeLayer(toko_label);
+                            }
+                            if (map.getZoom() > 10 && map.hasLayer(toko_label)==false) {
+                                map.addLayer(toko_label);
+                            }
+                            });
+
+            
+
+                        
+            
+                        </script>
+            </section>
+
+            <!-- Footer-->
+            <footer>
+                <p>nafranandya</p>
+            </footer>
+    </body>
+</html>
+
+<!---------Labelgun--------->
+<script src="https://unpkg.com/rbush@2.0.2/rbush.min.js"></script>
+<script src="https://unpkg.com/labelgun@6.1.0/lib/labelgun.min.js"></script>

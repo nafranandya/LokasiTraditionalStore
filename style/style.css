@@ -1,0 +1,116 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.menu-bar {
+    overflow: hidden;
+    width: 100%;
+    background-color: #0D009d;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, -2);
+    }
+
+header .menu-bar .navbar-collapse ul li a{
+    display: block;
+    background:#006AB4;
+    color:#FFFFFF;
+    font-size: 1rem;
+    border-radius: 10rem;
+    font-weight: '500';
+}
+
+header .navbar ul li a:hover{
+    background:#006AB4;
+}
+
+.nav-link {
+    font-size: 16px;
+    margin: 3px;
+    color: #fff!important;
+}
+
+.navbar-nav {
+    text-align: right;
+    margin-right: 20px;
+}
+
+.menu-bar .navbar-toggler {
+    padding-right: 20px;
+    outline: none!important;
+    border: none!important;
+}
+
+.navbar .fa {
+    color: #fff!important;
+    font-size: 26px;
+}
+
+.nav-link:hover {
+    font-weight: 600;
+    border-bottom: 2px solid #FFFFFF;
+}
+
+.navbar-brand img {
+    height: 50px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .nav-link:hover {
+        border-bottom: none!important;
+    }
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+.judul {
+    font-size:1.2rem;
+    text-align:center;
+    background:#006AB4;
+    color: #FFFFFF;
+    border-radius: 5rem;
+    padding:.5rem .5rem;
+    }
+
+.button1 {
+    padding:.2rem .2rem;
+    background:#FFFFFF;
+    color: #006AB4;
+    cursor: pointer;
+    margin-top: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5rem;
+    }
+    
+.button1:hover{
+    background: #006AB4;
+    }
+
+footer {
+    background-color: #0D009d ;
+    font-size: .65rem;
+    height: 20px;
+    padding: 1px;
+    text-align: center;
+    color: white;
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url("images/yogya.jpg");
+    background-size: cover;
+}
+
+.judul1 {
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 20pt;
+    }
